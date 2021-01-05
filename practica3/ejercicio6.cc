@@ -15,14 +15,14 @@ int main(){
       pid_t sid = setsid();
       chdir("/tmp"); // Fijo el directorio de trabajo del demonio a /tmp
 
-      int pidHijo = getpid();
+      pidHijo = getpid();
       printf("PID %i\n", pidHijo);
       printf("PPID %i\n", getppid());
       printf("PGID %i\n", getpgid(getppid()));
       printf("SID %i\n", getsid(getppid()));
    }
    else{
-      wait(pidHijo);
+      sleep(3);
       
       printf("PID %i\n", getpid());
       printf("PPID %i\n", getppid());

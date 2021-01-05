@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/resource.h>
+#include <fcntl.h>
 
-int main(){
+int main(int argc, char *argv[]){
    
    pid_t pid = fork();
 
@@ -19,12 +20,22 @@ int main(){
       printf("PPID %i\n", getppid());
       printf("PGID %i\n", getpgid(getppid()));
       printf("SID %i\n", getsid(getppid()));
+
+      int salidaEstandar = open("/tmp/daemon.out", O_CREAT | O_RDWR, 0777);
+      int salidaError = open("/dev/null/", O_CREAT | O_RDWR, 0777);
+      int entradaEstandar = open("tmp/daemon.err", O_CREAT | O_RDWR, 0777);
+
+      int salidaEstandar2 = dup2(salidaEstandar, 1);
+      int salidaError2 = dup2(salidaError, 2);
+      int entradaEstandar2 = dup2(entradaEstandar, 0);
       
-      sleep(3); // Duermo al hijo para que el padre termine antes
+      if(execvp(argv[1], &argv[1])){
+         perror("ERROR");
+      }
+      
    }
    else{
-      //sleep(3); // Duermo al padre para que el hijo termine antes
-      
+
       printf("PID %i\n", getpid());
       printf("PPID %i\n", getppid());
       printf("PGID %i\n", getpgid(getppid()));

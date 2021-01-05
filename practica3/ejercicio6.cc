@@ -20,10 +20,10 @@ int main(){
       printf("PGID %i\n", getpgid(getppid()));
       printf("SID %i\n", getsid(getppid()));
       
-      sleep(3); // Duermo al hijo para que el padre termine antes
+      //sleep(10); // Duermo al hijo para que el padre termine antes
    }
    else{
-      //sleep(3); // Duermo al padre para que el hijo termine antes
+      sleep(10); // Duermo al padre para que el hijo termine antes
       
       printf("PID %i\n", getpid());
       printf("PPID %i\n", getppid());

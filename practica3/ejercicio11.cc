@@ -16,10 +16,10 @@ int main(){
     sigprocmask(SIG_BLOCK, &conjunto, NULL);
 
     
-    char *sg = getenv("SLEEP_SECS"); // Obtenemos la variable de entorno
-    int seg = atoi(sg);
+    //char *sg = getenv("SLEEP_SECS"); // Obtenemos la variable de entorno
+    //int seg = atoi(sg);
 
-    sleep(seg);
+    sleep(10);
 
     sigset_t conjPendiente;
     sigpending(&conjPendiente);
